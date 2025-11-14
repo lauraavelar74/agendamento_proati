@@ -10,13 +10,13 @@ if (!isset($_SESSION['user_id'])) {
 // Página que será incluída no painel
 $page = $_GET['page'] ?? 'inicio';
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Painel - Sistema de Agendamentos</title>
     <link rel="stylesheet" href="styles.css">
+
     <style>
         body {
             margin: 0;
@@ -63,7 +63,7 @@ $page = $_GET['page'] ?? 'inicio';
     <h2>Olá, <?php echo htmlspecialchars($_SESSION['user_name']); ?></h2>
     <ul>
         <li><a href="painel.php?page=inicio">Início</a></li>
-        <li><a href="novo_agendamentos.php">Novo Agendamento</a></li>
+        <li><a href="painel.php?page=novo">Novo Agendamento</a></li>
         <li><a href="painel.php?page=lista">Lista de Agendamentos</a></li>
         <li><a href="logout.php">Sair</a></li>
     </ul>
@@ -72,20 +72,17 @@ $page = $_GET['page'] ?? 'inicio';
 <main class="content">
     <?php
     switch ($page) {
+
         case 'novo':
-            if (file_exists('novo_agendamentos.php')) {
-                include 'novo_agendamentos.php';
-            } else {
-                echo "<p>Página de Novo Agendamento não encontrada.</p>";
-            }
+            include file_exists('novo_agendamentos.php') 
+                ? 'novo_agendamentos.php' 
+                : '<p>Página de Novo Agendamento não encontrada.</p>';
             break;
 
         case 'lista':
-            if (file_exists('lista_agendamentos.php')) {
-                include 'lista_agendamentos.php';
-            } else {
-                echo "<p>Página de Lista de Agendamentos não encontrada.</p>";
-            }
+            include file_exists('lista_agendamentos.php') 
+                ? 'lista_agendamentos.php' 
+                : '<p>Página de Lista de Agendamentos não encontrada.</p>';
             break;
 
         default:

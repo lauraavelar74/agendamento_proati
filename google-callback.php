@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 
@@ -29,15 +31,24 @@ if (isset($_GET['code'])) {
     $data = json_decode($token, true);
 
     if (isset($data['access_token'])) {
+
+        // Obtém informações do usuário
         $userInfo = file_get_contents('https://www.googleapis.com/oauth2/v2/userinfo?access_token=' . $data['access_token']);
         $user = json_decode($userInfo, true);
-        echo "Bem-vinda, " . htmlspecialchars($user['name']);
-//        header('location:/painel.php')
-          } else {
+
+        // Salva informações na sessão
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_name'] = $user['name'];
+        $_SESSION['user_email'] = $user['email'];
+
+        // Redireciona para o painel
+        header("Location: painel.php");
+        exit;
+
+    } else {
         echo "Erro ao obter token de acesso.";
     }
+
 } else {
     echo "Código não recebido.";
 }
-header('location:/painel.php')
-    ?>
