@@ -15,7 +15,7 @@ $page = $_GET['page'] ?? 'inicio';
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>laura</title>
+    <title>laura avelar</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
