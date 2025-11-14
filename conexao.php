@@ -1,7 +1,7 @@
 <?php
 // Configurações do banco
-$host = 'localhost';
-$db   = 'agendamentos';
+$host = $_ENV[$HOST];
+$db   = $_ENV[$DB];
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
